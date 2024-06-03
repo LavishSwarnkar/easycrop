@@ -8,7 +8,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -35,7 +34,9 @@ internal val LocalVerticalControls = staticCompositionLocalOf { false }
 internal fun CropperControls(
     isVertical: Boolean,
     state: CropState,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    showAspectRatioSelectionButton: Boolean,
+    showShapeCropButton: Boolean,
 ) {
     CompositionLocalProvider(LocalVerticalControls provides isVertical) {
         ButtonsBar(modifier = modifier) {
@@ -51,31 +52,35 @@ internal fun CropperControls(
             IconButton(onClick = { state.flipVertical() }) {
                 Icon(painterResource(id = R.drawable.flip_ver), null)
             }
-            Box {
-                var menu by remember { mutableStateOf(false) }
-                IconButton(onClick = { menu = !menu }) {
-                    Icon(painterResource(id = R.drawable.resize), null)
-                }
-                if (menu) AspectSelectionMenu(
-                    onDismiss = { menu = false },
-                    region = state.region,
-                    onRegion = { state.region = it },
-                    lock = state.aspectLock,
-                    onLock = { state.aspectLock = it }
-                )
-            }
-            LocalCropperStyle.current.shapes?.let { shapes ->
+            if (showAspectRatioSelectionButton) {
                 Box {
                     var menu by remember { mutableStateOf(false) }
                     IconButton(onClick = { menu = !menu }) {
-                        Icon(Icons.Default.Star, null)
+                        Icon(painterResource(id = R.drawable.resize), null)
                     }
-                    if (menu) ShapeSelectionMenu(
+                    if (menu) AspectSelectionMenu(
                         onDismiss = { menu = false },
-                        selected = state.shape,
-                        onSelect = { state.shape = it },
-                        shapes = shapes
+                        region = state.region,
+                        onRegion = { state.region = it },
+                        lock = state.aspectLock,
+                        onLock = { state.aspectLock = it }
                     )
+                }
+            }
+            if (showShapeCropButton) {
+                LocalCropperStyle.current.shapes?.let { shapes ->
+                    Box {
+                        var menu by remember { mutableStateOf(false) }
+                        IconButton(onClick = { menu = !menu }) {
+                            Icon(Icons.Default.Star, null)
+                        }
+                        if (menu) ShapeSelectionMenu(
+                            onDismiss = { menu = false },
+                            selected = state.shape,
+                            onSelect = { state.shape = it },
+                            shapes = shapes
+                        )
+                    }
                 }
             }
         }

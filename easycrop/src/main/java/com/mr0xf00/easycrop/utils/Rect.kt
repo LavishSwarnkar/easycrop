@@ -105,7 +105,7 @@ internal fun Rect.abs(rel: Offset): Offset {
     return Offset(left + rel.x * width, top + rel.y * height)
 }
 
-internal fun Rect.setAspect(aspect: AspectRatio): Rect = setAspect(aspect.x.toFloat() / aspect.y)
+fun Rect.setAspect(aspect: AspectRatio): Rect = setAspect(aspect.x.toFloat() / aspect.y)
 
 internal fun Rect.setAspect(aspect: Float): Rect {
     val dim = max(width, height)

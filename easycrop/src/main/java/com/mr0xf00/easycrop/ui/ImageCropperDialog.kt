@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -24,6 +25,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.mr0xf00.easycrop.*
 import com.mr0xf00.easycrop.R
+import com.mr0xf00.easycrop.utils.setAspect
 
 private val CropperDialogProperties = @OptIn(ExperimentalComposeUiApi::class) (DialogProperties(
     usePlatformDefaultWidth = false,
@@ -39,8 +41,18 @@ fun ImageCropperDialog(
     dialogPadding: PaddingValues = PaddingValues(16.dp),
     dialogShape: Shape = RoundedCornerShape(8.dp),
     topBar: @Composable (CropState) -> Unit = { DefaultTopBar(it) },
-    cropControls: @Composable BoxScope.(CropState) -> Unit = { DefaultControls(it) }
+    showAspectRatioSelectionButton: Boolean = true,
+    showShapeCropButton: Boolean = true,
+    lockAspectRatio: AspectRatio? = null,
+    cropControls: @Composable BoxScope.(CropState) -> Unit = { DefaultControls(it, showAspectRatioSelectionButton, showShapeCropButton) }
 ) {
+    LaunchedEffect(key1 = state) {
+        lockAspectRatio?.let {
+            state.region = state.region.setAspect(it)
+            state.aspectLock = true
+        }
+    }
+
     CompositionLocalProvider(LocalCropperStyle provides style) {
         Dialog(
             onDismissRequest = { state.done(accept = false) },
@@ -67,7 +79,11 @@ fun ImageCropperDialog(
 }
 
 @Composable
-private fun BoxScope.DefaultControls(state: CropState) {
+private fun BoxScope.DefaultControls(
+    state: CropState,
+    showAspectRatioSelectionButton: Boolean,
+    showShapeCropButton: Boolean
+) {
     val verticalControls =
         LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
     CropperControls(
@@ -76,6 +92,8 @@ private fun BoxScope.DefaultControls(state: CropState) {
         modifier = Modifier
             .align(if (!verticalControls) Alignment.BottomCenter else Alignment.CenterEnd)
             .padding(12.dp),
+        showAspectRatioSelectionButton = showAspectRatioSelectionButton,
+        showShapeCropButton = showShapeCropButton
     )
 }
 

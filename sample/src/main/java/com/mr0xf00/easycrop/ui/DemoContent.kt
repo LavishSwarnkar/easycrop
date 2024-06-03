@@ -7,6 +7,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.unit.dp
+import com.mr0xf00.easycrop.AspectRatio
 import com.mr0xf00.easycrop.CropState
 import com.mr0xf00.easycrop.CropperLoading
 import com.mr0xf00.easycrop.ui.theme.EasyCropTheme
@@ -21,7 +22,12 @@ fun DemoContent(
 ) {
     if (cropState != null) {
         EasyCropTheme(darkTheme = true) {
-            ImageCropperDialog(state = cropState)
+            ImageCropperDialog(
+                state = cropState,
+                showAspectRatioSelectionButton = false,
+                showShapeCropButton = false,
+                lockAspectRatio = AspectRatio(4, 3)
+            )
         }
     }
     if (cropState == null && loadingStatus != null) {
