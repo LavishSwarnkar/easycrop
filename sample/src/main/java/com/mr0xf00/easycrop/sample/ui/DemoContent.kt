@@ -1,4 +1,4 @@
-package com.mr0xf00.easycrop.ui
+package com.mr0xf00.easycrop.sample.ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 import com.mr0xf00.easycrop.AspectRatio
 import com.mr0xf00.easycrop.CropState
 import com.mr0xf00.easycrop.CropperLoading
-import com.mr0xf00.easycrop.ui.theme.EasyCropTheme
+import com.mr0xf00.easycrop.sample.ui.theme.EasyCropTheme
 
 @Composable
 fun DemoContent(
@@ -22,7 +22,7 @@ fun DemoContent(
 ) {
     if (cropState != null) {
         EasyCropTheme(darkTheme = true) {
-            ImageCropperDialog(
+            com.mr0xf00.easycrop.ui.ImageCropperDialog(
                 state = cropState,
                 showAspectRatioSelectionButton = false,
                 showShapeCropButton = false,

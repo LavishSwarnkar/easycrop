@@ -1,4 +1,4 @@
-package com.mr0xf00.easycrop.presentation
+package com.mr0xf00.easycrop.sample.presentation
 
 import android.app.Application
 import android.net.Uri

@@ -1,4 +1,4 @@
-package com.mr0xf00.easycrop.ui
+package com.mr0xf00.easycrop.sample.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

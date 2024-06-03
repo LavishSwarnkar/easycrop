@@ -7,11 +7,11 @@ def composeBomVersion = project.property('composeBomVersion')
 def composeCompilerVersion = project.property('composeCompilerVersion')
 
 android {
-    namespace 'com.mr0xf00.easycrop'
+    namespace 'com.mr0xf00.easycrop.sample'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.mr0xf00.easycrop"
+        applicationId "com.mr0xf00.easycrop.sample"
         minSdk 21
         targetSdk 33
         versionCode 1

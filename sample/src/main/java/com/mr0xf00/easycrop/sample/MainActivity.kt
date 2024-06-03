@@ -1,4 +1,4 @@
-package com.mr0xf00.easycrop
+package com.mr0xf00.easycrop.sample
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,9 +8,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import com.mr0xf00.easycrop.presentation.ImagesViewModel
-import com.mr0xf00.easycrop.ui.ViewModelDemo
-import com.mr0xf00.easycrop.ui.theme.EasyCropTheme
+import com.mr0xf00.easycrop.sample.presentation.ImagesViewModel
+import com.mr0xf00.easycrop.sample.ui.ViewModelDemo
+import com.mr0xf00.easycrop.sample.ui.theme.EasyCropTheme
 
 class MainActivity : ComponentActivity() {
     val viewModel: ImagesViewModel by viewModels()
