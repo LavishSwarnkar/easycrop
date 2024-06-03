@@ -2,7 +2,7 @@ plugins {
     kotlin("android")
     id ("com.android.library")
     id("maven-publish")
-    id("signing")
+//    id("signing")
 }
 
 val composeBomVersion : String by project
@@ -113,6 +113,6 @@ publishing {
 //    }
 }
 
-signing {
-    sign(publishing.publications)
-}
+//signing {
+//    sign(publishing.publications)
+//}
